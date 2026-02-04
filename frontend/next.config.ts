@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  turbopack: {},
   // Use webpack instead of Turbopack for WebAssembly support
   webpack: (config, { isServer }) => {
     // Handle WebAssembly files
