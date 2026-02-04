@@ -1,14 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  turbopack: {},
-  // Use webpack instead of Turbopack for WebAssembly support
+  // Disable Turbopack for Vercel compatibility
   webpack: (config, { isServer }) => {
     // Handle WebAssembly files
     config.experiments = {
       ...config.experiments,
       asyncWebAssembly: true,
-      layers: true,
     };
 
     // Handle fhenixjs WebAssembly imports
@@ -19,25 +17,12 @@ const nextConfig: NextConfig = {
       crypto: false,
     };
 
-    // Add rule for .wasm files - handle fhenixjs WASM imports
+    // Add rule for .wasm files
     config.module.rules.push({
       test: /\.wasm$/,
       type: 'asset/resource',
       generator: {
         filename: 'static/wasm/[name].[hash][ext]'
-      }
-    });
-
-    // Handle fhenixjs specific WASM imports
-    config.module.rules.push({
-      test: /fhenixjs.*\.wasm$/,
-      type: 'asset/resource',
-      use: {
-        loader: 'file-loader',
-        options: {
-          publicPath: '/_next/static/wasm/',
-          outputPath: 'static/wasm/',
-        }
       }
     });
 
