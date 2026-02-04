@@ -1,0 +1,15 @@
+
+> frontend@0.1.0 dev
+> next dev --webpack --hostname 127.0.0.1 --port 3001
+
+▲ Next.js 16.1.6 (webpack)
+- Local:         http://127.0.0.1:3001
+- Network:       http://127.0.0.1:3001
+- Environments: .env.local
+
+✓ Starting...
+✓ Ready in 6.1s
+○ Compiling /mint ...
+ GET /mint 200 in 25.6s (compile: 18.4s, render: 7.2s)
+ HEAD /mint 200 in 207ms (compile: 25ms, render: 182ms)
+ GET /mint 200 in 71ms (compile: 12ms, render: 60ms)

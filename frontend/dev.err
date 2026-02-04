@@ -1,0 +1,62 @@
+⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\Mir Mohammed\package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * C:\Users\Mir Mohammed\OneDrive\Desktop\FINX OG\frontend\package-lock.json
+
+⚠ ./node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
+Module not found: Can't resolve '@react-native-async-storage/async-storage' in 'C:\Users\Mir Mohammed\OneDrive\Desktop\FINX OG\frontend\node_modules\@metamask\sdk\dist\browser\es'
+
+Import trace for requested module:
+./node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
+./node_modules/@wagmi/connectors/dist/esm/metaMask.js
+./node_modules/@wagmi/connectors/dist/esm/exports/index.js
+./node_modules/wagmi/dist/esm/exports/connectors.js
+./node_modules/@rainbow-me/rainbowkit/dist/index.js
+./src/app/providers.tsx
+
+Circular dependency between chunks with runtime (_app-pages-browser_node_modules_tfhe_snippets_wasm-bindgen-rayon-9d40dbf53d170728_src_workerH-98ac3b, webpack)
+This prevents using hashes of each other and should be avoided.
+
+./node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
+Module not found: Can't resolve '@react-native-async-storage/async-storage' in 'C:\Users\Mir Mohammed\OneDrive\Desktop\FINX OG\frontend\node_modules\@metamask\sdk\dist\browser\es'
+
+Import trace for requested module:
+./node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
+./node_modules/@wagmi/connectors/dist/esm/metaMask.js
+./node_modules/@wagmi/connectors/dist/esm/exports/index.js
+./node_modules/wagmi/dist/esm/exports/connectors.js
+./node_modules/@rainbow-me/rainbowkit/dist/index.js
+./src/app/providers.tsx
+
+Circular dependency between chunks with runtime (0, webpack-runtime)
+This prevents using hashes of each other and should be avoided.
+Lit is in dev mode. Not recommended for production! See https://lit.dev/msg/dev-mode for more information.
+⚠ ./node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
+Module not found: Can't resolve '@react-native-async-storage/async-storage' in 'C:\Users\Mir Mohammed\OneDrive\Desktop\FINX OG\frontend\node_modules\@metamask\sdk\dist\browser\es'
+
+Import trace for requested module:
+./node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
+./node_modules/@wagmi/connectors/dist/esm/metaMask.js
+./node_modules/@wagmi/connectors/dist/esm/exports/index.js
+./node_modules/wagmi/dist/esm/exports/connectors.js
+./node_modules/@rainbow-me/rainbowkit/dist/index.js
+./src/app/providers.tsx
+
+Circular dependency between chunks with runtime (_app-pages-browser_node_modules_tfhe_snippets_wasm-bindgen-rayon-9d40dbf53d170728_src_workerH-98ac3b, webpack)
+This prevents using hashes of each other and should be avoided.
+
+./node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
+Module not found: Can't resolve '@react-native-async-storage/async-storage' in 'C:\Users\Mir Mohammed\OneDrive\Desktop\FINX OG\frontend\node_modules\@metamask\sdk\dist\browser\es'
+
+Import trace for requested module:
+./node_modules/@metamask/sdk/dist/browser/es/metamask-sdk.js
+./node_modules/@wagmi/connectors/dist/esm/metaMask.js
+./node_modules/@wagmi/connectors/dist/esm/exports/index.js
+./node_modules/wagmi/dist/esm/exports/connectors.js
+./node_modules/@rainbow-me/rainbowkit/dist/index.js
+./src/app/providers.tsx
+
+Circular dependency between chunks with runtime (0, webpack-runtime)
+This prevents using hashes of each other and should be avoided.

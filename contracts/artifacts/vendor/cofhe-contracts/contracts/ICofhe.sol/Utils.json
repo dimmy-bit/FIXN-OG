@@ -1,0 +1,10 @@
+{
+  "_format": "hh-sol-artifact-1",
+  "contractName": "Utils",
+  "sourceName": "vendor/cofhe-contracts/contracts/ICofhe.sol",
+  "abi": [],
+  "bytecode": "0x6080806040523460175760399081601c823930815050f35b5f80fdfe5f80fdfea2646970667358221220b6754bf44eb991c2cdc824532621b4032eced449de09d7ca36ea867ae9b69fa364736f6c63430008190033",
+  "deployedBytecode": "0x5f80fdfea2646970667358221220b6754bf44eb991c2cdc824532621b4032eced449de09d7ca36ea867ae9b69fa364736f6c63430008190033",
+  "linkReferences": {},
+  "deployedLinkReferences": {}
+}

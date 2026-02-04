@@ -1,0 +1,43 @@
+{
+  "name": "FIXN OG #2",
+  "description": "Privacy-preserving NFT with encrypted attributes on Fhenix CoFHE. This NFT contains hidden rarity and special attributes only visible to the owner.",
+  "image": "ipfs://QmYourImageHashHere/2.png",
+  "external_url": "https://your-website.com/nft/2",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Digital Blue"
+    },
+    {
+      "trait_type": "Type", 
+      "value": "OG Early Adopter"
+    },
+    {
+      "trait_type": "Generation",
+      "value": "Genesis"
+    },
+    {
+      "trait_type": "Special Power",
+      "value": "🔒 Encrypted"
+    },
+    {
+      "trait_type": "Rarity Score",
+      "value": "🔒 Encrypted"
+    }
+  ],
+  "properties": {
+    "category": "image",
+    "creators": [
+      {
+        "address": "0x908bcf0d643e91fDA70a67A90580BBd121072a74",
+        "share": 100
+      }
+    ]
+  },
+  "fhenix_features": {
+    "encrypted_rarity": true,
+    "encrypted_attributes": true,
+    "cofhe_enabled": true,
+    "privacy_level": "HIGH"
+  }
+}

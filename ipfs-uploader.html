@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FINX OG - Upload Metadata to IPFS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            font-size: 14px;
+        }
+        button {
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            margin-top: 20px;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border-left: 4px solid #4ECDC4;
+        }
+        .error {
+            border-left-color: #FF6B6B;
+            background: rgba(255, 107, 107, 0.2);
+        }
+        .success {
+            border-left-color: #4ECDC4;
+            background: rgba(78, 205, 196, 0.2);
+        }
+        .metadata-preview {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+        .step {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            border-left: 4px solid #FFD700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 FINX OG IPFS Metadata Uploader</h1>
+        
+        <div class="step">
+            <h3>📋 Step 1: Get Your Pinata API Keys</h3>
+            <p>1. Go to <a href="https://pinata.cloud" target="_blank" style="color: #4ECDC4;">Pinata.cloud</a></p>
+            <p>2. Sign up/login and go to API Keys</p>
+            <p>3. Create new API key with "pinFile" and "pinJSON" permissions</p>
+        </div>
+
+        <div class="step">
+            <h3>🔑 Step 2: Enter Your API Keys</h3>
+            <div class="input-group">
+                <label for="apiKey">Pinata API Key:</label>
+                <input type="text" id="apiKey" placeholder="Enter your Pinata API Key">
+            </div>
+            <div class="input-group">
+                <label for="secretKey">Pinata Secret API Key:</label>
+                <input type="password" id="secretKey" placeholder="Enter your Pinata Secret API Key">
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>📝 Step 3: Upload Metadata</h3>
+            <p>This will upload the 3 sample NFT metadata files we created:</p>
+            <ul>
+                <li>FIXN OG #1 - Cosmic Purple</li>
+                <li>FIXN OG #2 - Digital Blue</li>
+                <li>FIXN OG #3 - Matrix Green</li>
+            </ul>
+            <button onclick="uploadMetadata()" id="uploadBtn">📤 Upload Metadata to Pinata</button>
+        </div>
+
+        <div id="results"></div>
+    </div>
+
+    <script>
+        // Sample metadata files
+        const metadataFiles = {
+            '1.json': {
+                name: "FIXN OG #1",
+                description: "Privacy-preserving NFT with encrypted attributes on Fhenix CoFHE. This NFT contains hidden rarity and special attributes only visible to the owner.",
+                image: "ipfs://QmYourImageHashHere/1.png",
+                external_url: "https://your-website.com/nft/1",
+                attributes: [
+                    { trait_type: "Background", value: "Cosmic Purple" },
+                    { trait_type: "Type", value: "OG Founder" },
+                    { trait_type: "Generation", value: "Genesis" },
+                    { trait_type: "Special Power", value: "🔒 Encrypted" },
+                    { trait_type: "Rarity Score", value: "🔒 Encrypted" }
+                ],
+                properties: {
+                    category: "image",
+                    creators: [
+                        { address: "0x908bcf0d643e91fDA70a67A90580BBd121072a74", share: 100 }
+                    ]
+                },
+                fhenix_features: {
+                    encrypted_rarity: true,
+                    encrypted_attributes: true,
+                    cofhe_enabled: true,
+                    privacy_level: "HIGH"
+                }
+            },
+            '2.json': {
+                name: "FIXN OG #2",
+                description: "Privacy-preserving NFT with encrypted attributes on Fhenix CoFHE. This NFT contains hidden rarity and special attributes only visible to the owner.",
+                image: "ipfs://QmYourImageHashHere/2.png",
+                external_url: "https://your-website.com/nft/2",
+                attributes: [
+                    { trait_type: "Background", value: "Digital Blue" },
+                    { trait_type: "Type", value: "OG Early Adopter" },
+                    { trait_type: "Generation", value: "Genesis" },
+                    { trait_type: "Special Power", value: "🔒 Encrypted" },
+                    { trait_type: "Rarity Score", value: "🔒 Encrypted" }
+                ],
+                properties: {
+                    category: "image",
+                    creators: [
+                        { address: "0x908bcf0d643e91fDA70a67A90580BBd121072a74", share: 100 }
+                    ]
+                },
+                fhenix_features: {
+                    encrypted_rarity: true,
+                    encrypted_attributes: true,
+                    cofhe_enabled: true,
+                    privacy_level: "HIGH"
+                }
+            },
+            '3.json': {
+                name: "FIXN OG #3",
+                description: "Privacy-preserving NFT with encrypted attributes on Fhenix CoFHE. This NFT contains hidden rarity and special attributes only visible to the owner.",
+                image: "ipfs://QmYourImageHashHere/3.png",
+                external_url: "https://your-website.com/nft/3",
+                attributes: [
+                    { trait_type: "Background", value: "Matrix Green" },
+                    { trait_type: "Type", value: "OG Developer" },
+                    { trait_type: "Generation", value: "Genesis" },
+                    { trait_type: "Special Power", value: "🔒 Encrypted" },
+                    { trait_type: "Rarity Score", value: "🔒 Encrypted" }
+                ],
+                properties: {
+                    category: "image",
+                    creators: [
+                        { address: "0x908bcf0d643e91fDA70a67A90580BBd121072a74", share: 100 }
+                    ]
+                },
+                fhenix_features: {
+                    encrypted_rarity: true,
+                    encrypted_attributes: true,
+                    cofhe_enabled: true,
+                    privacy_level: "HIGH"
+                }
+            }
+        };
+
+        async function uploadMetadata() {
+            const apiKey = document.getElementById('apiKey').value;
+            const secretKey = document.getElementById('secretKey').value;
+            const resultsDiv = document.getElementById('results');
+            const uploadBtn = document.getElementById('uploadBtn');
+
+            if (!apiKey || !secretKey) {
+                showResult('Please enter both API Key and Secret API Key', 'error');
+                return;
+            }
+
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = '⏳ Uploading...';
+            resultsDiv.innerHTML = '';
+
+            try {
+                const uploadedFiles = [];
+
+                for (const [fileName, metadata] of Object.entries(metadataFiles)) {
+                    showResult(`📤 Uploading ${fileName}...`, 'info');
+
+                    const formData = new FormData();
+                    const blob = new Blob([JSON.stringify(metadata, null, 2)], { type: 'application/json' });
+                    formData.append('file', blob, fileName);
+
+                    const response = await fetch('https://api.pinata.cloud/pinning/pinFileToIPFS', {
+                        method: 'POST',
+                        headers: {
+                            'pinata_api_key': apiKey,
+                            'pinata_secret_api_key': secretKey,
+                        },
+                        body: formData,
+                    });
+
+                    const result = await response.json();
+                    
+                    if (result.IpfsHash) {
+                        const url = `https://gateway.pinata.cloud/ipfs/${result.IpfsHash}`;
+                        uploadedFiles.push({ fileName, ipfsHash: result.IpfsHash, url });
+                        showResult(`✅ ${fileName} uploaded successfully!`, 'success');
+                        showResult(`📋 IPFS Hash: ${result.IpfsHash}`, 'success');
+                        showResult(`🔗 URL: ${url}`, 'success');
+                    } else {
+                        throw new Error(`Failed to upload ${fileName}: ${result.error || 'Unknown error'}`);
+                    }
+                }
+
+                // Show summary and next steps
+                showResult('🎉 All metadata uploaded successfully!', 'success');
+                
+                const baseURI = 'https://gateway.pinata.cloud/ipfs/';
+                showResult(`📋 Contract Base URI: ${baseURI}`, 'success');
+                
+                showResult(`
+🔧 Next Steps:
+1. Update your contract baseURI:
+   await contract.setBaseURI("${baseURI}");
+
+2. Your NFTs will now resolve to:
+   Token 1: ${baseURI}1.json
+   Token 2: ${baseURI}2.json  
+   Token 3: ${baseURI}3.json
+
+3. Test minting in your frontend!
+                `, 'success');
+
+            } catch (error) {
+                showResult(`❌ Upload failed: ${error.message}`, 'error');
+            } finally {
+                uploadBtn.disabled = false;
+                uploadBtn.textContent = '📤 Upload Metadata to Pinata';
+            }
+        }
+
+        function showResult(message, type = 'info') {
+            const resultsDiv = document.getElementById('results');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `result ${type}`;
+            resultDiv.innerHTML = message.replace(/\n/g, '<br>');
+            resultsDiv.appendChild(resultDiv);
+            resultsDiv.scrollTop = resultsDiv.scrollHeight;
+        }
+    </script>
+</body>
+</html>
