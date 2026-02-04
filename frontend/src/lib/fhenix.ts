@@ -84,6 +84,14 @@ export type PermissionStruct = {
     recipientSignature: `0x${string}`;
 };
 
+type TypedDataSigner = {
+    _signTypedData: (
+        domain: Record<string, unknown>,
+        types: Record<string, Array<Record<string, string>>>,
+        value: Record<string, unknown>
+    ) => Promise<string>;
+};
+
 export async function getOrCreatePermit(
     issuer: string,
     contractAddress: string,
@@ -131,7 +139,11 @@ export async function getOrCreatePermit(
         ],
     };
 
-    const signature = await (activeSigner as ethers.Signer)._signTypedData(domain, types, permission);
+    const typedSigner = activeSigner as ethers.Signer & TypedDataSigner;
+    if (typeof typedSigner._signTypedData !== "function") {
+        throw new Error("Signer does not support EIP-712 typed data signing");
+    }
+    const signature = await typedSigner._signTypedData(domain, types, permission);
 
     return {
         ...permission,
