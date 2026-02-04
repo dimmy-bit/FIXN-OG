@@ -75,7 +75,7 @@ export function NFTCard({
       }
 
       const provider = await connector.getProvider();
-      const ethersProvider = new ethers.providers.Web3Provider(provider);
+      const ethersProvider = new ethers.providers.Web3Provider(provider as any);
       const ethersSigner = ethersProvider.getSigner();
 
       if (!isCofheInitialized()) {
