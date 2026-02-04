@@ -1,6 +1,6 @@
 ﻿import abi from "./abi/FhenixOGNFT.json";
 
-export const CONTRACT_ABI = abi as const;
+export const CONTRACT_ABI = abi;
 
 // Contract address - set by deploy script into frontend/.env.local
 export const CONTRACT_ADDRESS =
