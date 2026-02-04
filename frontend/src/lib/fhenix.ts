@@ -173,13 +173,13 @@ export async function encryptNFTAttributes(
         ctHash: bigint;
         securityZone: number;
         utype: number;
-        signature: `0x${string}`;
+        signature: string;
     };
     encryptedAttribute: {
         ctHash: bigint;
         securityZone: number;
         utype: number;
-        signature: `0x${string}`;
+        signature: string;
     };
 }> {
     const rarityValue = Math.max(0, Math.min(4294967295, Math.floor(rarity)));
