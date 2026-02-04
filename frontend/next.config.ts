@@ -15,6 +15,7 @@ const nextConfig: NextConfig = {
       fs: false,
       path: false,
       crypto: false,
+      '@react-native-async-storage/async-storage': false,
     };
 
     // Add rule for .wasm files
@@ -25,6 +26,17 @@ const nextConfig: NextConfig = {
         filename: 'static/wasm/[name].[hash][ext]'
       }
     });
+
+    // Ignore circular dependency warnings
+    config.ignoreWarnings = [
+      {
+        module: /node_modules\/@metamask\/sdk/,
+        message: /Can't resolve '@react-native-async-storage\/async-storage'/,
+      },
+      {
+        message: /Circular dependency between chunks/,
+      },
+    ];
 
     return config;
   },
