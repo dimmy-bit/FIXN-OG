@@ -186,8 +186,8 @@ export async function encryptNFTAttributes(
     const attributeValue = Math.max(0, Math.min(4294967295, Math.floor(attribute)));
 
     const encryptResult = await cofhejs.encrypt([
-        Encryptable.uint32(rarityValue),
-        Encryptable.uint32(attributeValue),
+        Encryptable.uint32(BigInt(rarityValue)),
+        Encryptable.uint32(BigInt(attributeValue)),
     ]);
 
     if (!encryptResult || encryptResult.success === false) {
